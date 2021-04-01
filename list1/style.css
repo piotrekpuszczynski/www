@@ -77,7 +77,9 @@ aside, article {
 
 aside {
     height: 50%;
-
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 article {
