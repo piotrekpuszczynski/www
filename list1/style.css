@@ -41,7 +41,7 @@ main > header > h1 {
 }
 
 nav {
-    padding: var(--padding-high);
+    padding: var(calc(--padding-high * 2));
     background-color: black;
     display: flex;
     flex-direction: row;
