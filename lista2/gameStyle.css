@@ -76,3 +76,7 @@ canvas {
     max-width: 900px;
 }
 
+#state {
+    padding-top: 5%;
+    font-size: 30px;
+}

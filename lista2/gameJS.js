@@ -46,6 +46,7 @@ Promise.all([
                 break;
             }
         }
+        document.getElementById("state").textContent = "try to solve";
     });
 
 }).catch(() => {
@@ -187,8 +188,13 @@ function shuffleArray(array) {
                 break;
         }
 
-        swap(array, k, b)
+        swap(array, k, b);
         k = b;
+    }
+
+    while (k > 0) {
+        swap(array, k, k - 1);
+        k--;
     }
 }
 
@@ -312,5 +318,5 @@ function resetPuzzleAndCheckWin() {
 
 function gameOver() {
     document.onpointerdown = null;
-    document.onpointerup = null;
+    document.getElementById("state").textContent = "well done";
 }
