@@ -69,6 +69,7 @@ let _currentPiece;
 let _currentDropPiece;
 let _mouse;
 let _available = [];
+let j, k;
 
 function init(c, r, src) {
     columns = parseInt(c);
@@ -97,7 +98,7 @@ function setCanvas() {
     _canvas.style.border = "5px solid black";
 }
 
-function initPuzzle() { /*inicjalizacja pierwotna i na replay*/
+function initPuzzle() {
     _pieces = [];
     _mouse = {x:0, y:0};
     _currentPiece = null;
@@ -150,7 +151,7 @@ function shufflePuzzle() {
     _stage.fillRect(xPos, yPos, _pieceWidth,_pieceHeight);
     _stage.strokeRect(xPos, yPos, _pieceWidth,_pieceHeight);
 
-    document.onmousedown = onPuzzleClick;
+    document.onpointerdown = onPuzzleClick;
 }
 
 function shuffleArray(array) {
@@ -173,7 +174,7 @@ function onPuzzleClick(e) {
     _currentPiece = checkPieceClicked();
 
     if (_currentPiece != null) {
-        document.onmouseup = pieceDrop;
+        document.onpointerup = pieceDrop;
     }
 }
 
@@ -206,13 +207,12 @@ function checkPieceClicked() {
     return null;
 }
 
-let j, k;
 function pieceDrop(e) {
 
     _mouse.x = (e.clientX - _canvas.getBoundingClientRect().left) * _canvas.width / _canvas.getBoundingClientRect().width;
     _mouse.y = (e.clientY - _canvas.getBoundingClientRect().top) * _canvas.height / _canvas.getBoundingClientRect().height;
 
-    document.onmouseup = null;
+    document.onpointerup = null;
     _currentDropPiece = checkPieceDropped();
     if (_currentDropPiece != null && checkAvailability(_currentDropPiece)) {
         let tmp = {xPos: _currentPiece.xPos, yPos: _currentPiece.yPos};
@@ -279,7 +279,6 @@ function resetPuzzleAndCheckWin() {
 }
 
 function gameOver() {
-    document.onmousedown = null;
-    document.onmousemove = null;
-    document.onmouseup = null;
+    document.onpointerdown = null;
+    document.onpointerup = null;
 }
