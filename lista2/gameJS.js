@@ -132,11 +132,18 @@ function shufflePuzzle() {
     let xPos = 0;
     let yPos = 0;
     let i;
-    for (i = 0; i < _pieces.length - 1; i++) {
+    for (i = 0; i < _pieces.length; i++) {
         piece = _pieces[i];
         piece.xPos = xPos;
         piece.yPos = yPos;
-        _stage.drawImage(_img, piece.sx, piece.sy, _pieceWidth, _pieceHeight, xPos, yPos, _pieceWidth, _pieceHeight);
+        if (i === k) {
+            _stage.fillStyle = _color;
+            _stage.fillRect(piece.xPos, piece.yPos, _pieceWidth,_pieceHeight);
+        } else {
+            _stage.drawImage(_img, piece.sx, piece.sy,
+                _pieceWidth, _pieceHeight, piece.xPos,
+                piece.yPos, _pieceWidth, _pieceHeight);
+        }
         _stage.strokeRect(xPos, yPos, _pieceWidth,_pieceHeight);
         xPos += _pieceWidth;
         if (xPos >= _puzzleWidth) {
@@ -144,20 +151,44 @@ function shufflePuzzle() {
             yPos += _pieceHeight;
         }
     }
-    piece = _pieces[i];
-    piece.xPos = xPos;
-    piece.yPos = yPos;
-    _stage.fillStyle = _color;
-    _stage.fillRect(xPos, yPos, _pieceWidth,_pieceHeight);
-    _stage.strokeRect(xPos, yPos, _pieceWidth,_pieceHeight);
 
     document.onpointerdown = onPuzzleClick;
 }
 
 function shuffleArray(array) {
-    let r = 10 * columns * rows
+    let r = columns * columns * rows * rows;
     for (let i = 0; i < r; i++) {
-        swap(array, parseInt(Math.random() * columns * rows), parseInt(Math.random() * columns * rows))
+        let a = parseInt(Math.random() * 4);
+        let b;
+        switch (a) {
+            case 0:
+                if (k - columns >= 0) b = k - columns;
+                else if (k + columns < columns * rows) b = k + columns;
+                else if ((k % columns) !== 0) b = k - 1;
+                else if ((k - columns + 1) % columns !== 0) b = k + 1;
+                break;
+            case 1:
+                if (k + columns < columns * rows) b = k + columns;
+                else if ((k % columns) !== 0) b = k - 1;
+                else if ((k - columns + 1) % columns !== 0) b = k + 1;
+                else if (k - columns >= 0) b = k - columns;
+                break;
+            case 2:
+                if ((k % columns) !== 0) b = k - 1;
+                else if ((k - columns + 1) % columns !== 0) b = k + 1;
+                else if (k - columns >= 0) b = k - columns;
+                else if (k + columns < columns * rows) b = k + columns;
+                break;
+            case 3:
+                if ((k - columns + 1) % columns !== 0) b = k + 1;
+                else if (k - columns >= 0) b = k - columns;
+                else if (k + columns < columns * rows) b = k + columns;
+                else if ((k % columns) !== 0) b = k - 1;
+                break;
+        }
+
+        swap(array, k, b)
+        k = b;
     }
 }
 
