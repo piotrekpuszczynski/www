@@ -157,7 +157,7 @@ function shufflePuzzle() {
 }
 
 function shuffleArray(array) {
-    let r = columns * columns * rows * rows;
+    let r = columns * columns * rows * rows * 10;
     for (let i = 0; i < r; i++) {
         let a = parseInt(Math.random() * 4);
         let b;
