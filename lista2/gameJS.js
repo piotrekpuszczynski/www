@@ -306,7 +306,7 @@ function resetPuzzleAndCheckWin() {
         }
 
         _stage.strokeRect(piece.xPos, piece.yPos, _pieceWidth,_pieceHeight);
-        if (piece.xPos !== piece.sx || piece.yPos !== piece.sy) {
+        if (!(piece.xPos === piece.sx && piece.yPos === piece.sy)) {
             gameWin = false;
         }
     }
