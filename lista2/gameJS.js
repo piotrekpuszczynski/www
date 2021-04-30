@@ -174,7 +174,7 @@ function onPuzzleClick(e) {
     _currentPiece = checkPieceClicked();
 
     if (_currentPiece != null) {
-        document.onpointerup = pieceDrop;
+        document.onpointerdown = pieceDrop;
     }
 }
 
@@ -228,6 +228,7 @@ function pieceDrop(e) {
         _available[i] = null;
     }
     resetPuzzleAndCheckWin();
+    document.onpointerdown = onPuzzleClick;
 }
 
 function checkPieceDropped() {
