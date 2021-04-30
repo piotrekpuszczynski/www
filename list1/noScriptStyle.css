@@ -1,0 +1,18 @@
+div.menuBar {
+    transform: translateX(0%) translateY(-60px);
+}
+div.menu {
+    visibility: hidden;
+}
+body {
+    transform: translateY(60px);
+}
+
+@media only screen and (max-width: 700px) {
+    div.menuBar {
+        transform: translateY(calc(-4 * 60px));
+    }
+    body {
+        transform: translateY(calc(4 * 60px));
+    }
+}
