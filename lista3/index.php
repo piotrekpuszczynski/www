@@ -1,3 +1,7 @@
+<?php
+include('counter.php');
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -10,35 +14,10 @@
 <body>
 <main>
 
-    <header>
-        <h1>Moja strona</h1>
-    </header>
-
-    <div id="menu" class="menu">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-    <div id="menuBar" class="menuBar">
-        <ul>
-            <li><a href="#about">O mnie</a></li>
-            <li><a href="#projects">Projekty</a></li>
-            <li><a href="#code">Fragment kodu</a></li>
-            <li><a href="#hobbies">Zainteresowania</a></li>
-        </ul>
-    </div>
-
-    <script src="script.js"></script>
-    <noscript>
-        <link rel="stylesheet" href="noScriptStyle.css">
-    </noscript>
-
-    <!--<nav>
-        <a href="#about"><b>O mnie</b></a>
-        <a href="#projects"><b>Projekty</b></a>
-        <a href="#code"><b>Fragment kodu</b></a>
-        <a href="#hobbies"><b>Zainteresowania</b></a>
-    </nav>-->
+    <?php
+    include ('header.php');
+    include ('menu.php');
+    ?>
 
     <section id="about">
         <aside>
@@ -126,9 +105,7 @@
         </article>
     </section>
 
-    <footer>
-        <a href="https://github.com/piotrekpuszczynski">Piotr Puszczyński</a>
-    </footer>
+    <?php include ('footer.php'); ?>
 
 </main>
 </body>
