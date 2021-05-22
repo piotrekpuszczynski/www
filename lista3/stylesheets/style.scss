@@ -1,4 +1,4 @@
-$primary-color:#5cefd2;
+$primary-color: #7ceeda;
 $secondary-color:#f4fdfa;
 $third-color:#000000;
 $primary-accent-color:#000000;
@@ -7,6 +7,7 @@ $padding-low:1vh;
 $padding-high:4vh;
 $nav-height:10vh;
 $background-color: linear-gradient($third-color, $primary-color, $secondary-color, $primary-color, $third-color);
+$background-color-radial: radial-gradient(circle, $primary-color 30%, $third-color 92%);
 
 @mixin size($width, $height: $width) {
   width: $width;
@@ -14,7 +15,7 @@ $background-color: linear-gradient($third-color, $primary-color, $secondary-colo
 }
 
 body {
-  font-family: Tahoma, serif;
+  font-family: Palatino, URW Palladio L, serif;
   margin: 0;
 }
 
@@ -48,9 +49,12 @@ footer {
   min-height: $nav-height;
   @extend %center;
 
-  p {
-    color: $secondary-color;
-    font-size: 1.3vh;
+  ul {
+    list-style-type: none;
+    p {
+      color: $secondary-color;
+      font-size: 1.2vh;
+    }
   }
 }
 
@@ -160,6 +164,13 @@ div {
       padding: 0;
       float: right;
 
+      > hr {
+        background-color: black;
+        border: none;
+        width: 3px;
+        margin: 1px auto 1px auto;
+      }
+
       > li {
         list-style: none;
 
@@ -210,10 +221,71 @@ div {
   }
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: $media_medium) {
   div.menuBar > ul {
     display: inherit;
     width: 100%;
     text-align: right;
+
+    > hr {
+      width: 1px;
+    }
+  }
+}
+
+.inputLayout {
+  header {
+    height: 200px;
+  }
+  display: flex;
+  flex-flow: column;
+
+  .inputDiv {
+    font-weight: bold;
+    @extend %center;
+    margin: 5% 15%;
+    padding: 5%;
+    flex-flow: column;
+    color: black;
+    background-image: $background-color-radial;
+
+    .error {
+      @extend .input;
+      color: red;
+    }
+
+    .input {
+      padding-top: 1%;
+      background-color: transparent;
+
+      label {
+        background-color: transparent;
+        color: black;
+      }
+
+      button {
+        border-radius: 50px;
+        background-color: black;
+        color: white;
+
+        &:hover {
+          background-color: white;
+          color: black;
+        }
+      }
+
+      a {
+        background-color: transparent;
+        color: black;
+        &:hover {
+          color: gray;
+        }
+      }
+
+      input {
+        background-color: white;
+        border-radius: 4px;
+      }
+    }
   }
 }

@@ -2,7 +2,7 @@
     <ul>
         <li><a href="https://github.com/piotrekpuszczynski">Piotr Puszczyński</a></li>
 
-        <li><p>liczba odwiedzeń strony: <?php
+        <li><p>liczba Twoich odwiedzeń strony: <?php
                 if (!isset($_COOKIE["counter"])) {
                     ?>1<?php
                 } else {

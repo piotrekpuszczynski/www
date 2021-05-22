@@ -1,3 +1,3 @@
 <header>
-    <h1>Moja strona</h1>
+    <h1><?php if(isset($header)) echo $header; ?></h1>
 </header>

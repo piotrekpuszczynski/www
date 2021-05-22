@@ -1,4 +1,5 @@
 <?php
+include('connectToDatabase.php');
 include('counter.php');
 ?>
 
@@ -15,6 +16,7 @@ include('counter.php');
 <main>
 
     <?php
+    $header = "Moja strona";
     include ('header.php');
     include ('menu.php');
     ?>
