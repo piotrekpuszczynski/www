@@ -12,8 +12,9 @@
         <hr/>
         <?php
         if (isset($_SESSION["username"])) {
-            //setcookie(session_name(), session_id(), time() + 5 * 60); ?>
+            setcookie("session", "session", time() + 5 * 60); ?>
             <li><a href="logout.php">Wyloguj się</a></li>
+            <li><a href="delete.php">Usuń konto</a></li>
             <?php
         } else {
             ?>
@@ -25,4 +26,4 @@
     </ul>
 </div>
 
-<script src="javascript/script.js"></script>
+<script src="javascript/menu.js"></script>

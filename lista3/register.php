@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('connectToDatabase.php');
 $header = "Rejestracja";
 
@@ -14,9 +15,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($db)) {
 
     try {
         $stmt->execute();
+        $_SESSION["username"] = $username;
+        setcookie("session", "session", time() + 5 * 60);
         header("Location: /www/lista3/index.php");
-        //$_SESSION["username"] = $username;
-        //setcookie(session_name(), session_id(), time() + 5 * 60);
     } catch (PDOException) {
         $error = "już istnieje urzytkownik o podanej nazwie urzytkownika lub emailu";
     }

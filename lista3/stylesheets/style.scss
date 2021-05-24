@@ -43,6 +43,13 @@ main > header {
     font-family: Garamond, sans-serif;
     background: transparent;
   }
+  > p {
+    top: 0;
+    right: 20px;
+    position: absolute;
+    background-color: transparent;
+    color: white;
+  }
 }
 
 footer {
@@ -92,6 +99,27 @@ article {
       color: $second-accent-color;
       font-size: 6vh;
       font-weight: normal;
+    }
+  }
+  ul {
+    li {
+      display: flex;
+      flex-flow: row;
+      margin: 10px;
+
+      button {
+        border-radius: 50px;
+        background-color: black;
+        color: white;
+        margin-right: 80px;
+        max-height: 20px;
+        border-color: white;
+
+        &:hover {
+          background-color: white;
+          color: black;
+        }
+      }
     }
   }
 }
@@ -287,5 +315,13 @@ div {
         border-radius: 4px;
       }
     }
+  }
+}
+
+#comments {
+  @extend %center;
+  font-size: 6vh;
+  aside > p {
+    color: $second-accent-color;
   }
 }

@@ -1,11 +1,11 @@
 <?php
 session_start();
 include('connectToDatabase.php');
-$header = "Logowanie";
+$header = "Usuwanie konta";
 
 if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($db)) {
-    $username = $_POST["username"];
     $password = hash("sha256", $_POST["password"]);
+    $username = $_SESSION["username"];
 
     $stmt = $db->prepare("select password from users where username=:username");
     $stmt->bindValue(":username", $username);
@@ -17,12 +17,14 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($db)) {
     }
 
     if ($result == $password) {
-        $_SESSION["username"] = $username;
-        setcookie("session", "session", time() + 5 * 60);
-        header("Location: /www/lista3/index.php");
+        $stmt = $db->prepare("delete from users where username=:username");
+        $stmt->bindValue(":username", $username);
+
+        $stmt->execute();
+        include('logout.php');
     }
 
-    $error = "błędna nazwa urzytkownika lub haslo";
+    $error = "błędne haslo";
 }
 ?>
 
@@ -31,8 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($db)) {
 <head>
     <meta charset="utf-8">
     <title><?php echo $header ?></title>
-    <link rel="stylesheet" href="stylesheets/style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="stylesheets/style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
 <body>
@@ -41,19 +43,16 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($db)) {
     <?php include ('header.php'); ?>
 
     <form method="post" class="inputDiv">
+        <p class="input">Wpisz hasło aby usunąć konto</p>
         <div class="input">
-            <label for="username">Nazwa</label>
-            <input type="text" id="username" required="required" name="username">
+            <label>
+                <input type="password" required="required" name="password">
+            </label>
         </div>
         <div class="input">
-            <label for="password">Hasło</label>
-            <input type="password" id="password" required="required" name="password">
-        </div>
-        <div class="input">
-            <button type="submit">zaloguj się</button>
+            <button type="submit">potwierdź</button>
         </div>
         <p class="error"><?php if (isset($error)) echo $error ?></p>
-        <p class="input">Nie masz konta? <a href="register.php">zarejestruj się</a></p>
     </form>
 
     <?php include ('footer.php'); ?>

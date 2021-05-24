@@ -1,6 +1,16 @@
 <?php
+session_start();
 include('connectToDatabase.php');
 include('counter.php');
+
+if (!isset($_COOKIE["session"]) && isset($_SESSION["username"])) {
+    include('logout.php');
+}
+
+if ($_SERVER['REQUEST_METHOD'] === "POST") {
+    $_SESSION["comment"] = $_POST["comment"];
+    header("Location: #projects");
+}
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +20,6 @@ include('counter.php');
     <title>Piotr Puszczyński</title>
     <link rel="stylesheet" href="stylesheets/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 </head>
 <body>
 <main>
@@ -53,24 +62,29 @@ include('counter.php');
         <article>
             <h2>Projekty</h2>
             <p>Jak narazie zrealizowałem dwa wieksze projekty, jeden sam i jeden w zespole dwuosobowym.</p>
-            <ul>
-                <li>
-                    <a href="https://github.com/tofiljr6/WillyWonka">
-                        System do obsługi hurtowni słodyczy
-                    </a>
-                </li>
-                <li>
-                    <a href="https://github.com/piotrekpuszczynski/checkers">
-                        Gra w chińskie warcaby
-                    </a>
-                </li>
-            </ul>
+            <form method="post">
+                <ul>
+                    <li>
+                        <button id="db" class="" name="comment" value="candy hurt">komentarze</button>
+                        <a href="https://github.com/tofiljr6/WillyWonka"
+                        >System do obsługi hurtowni słodyczy</a>
+                    </li>
+                    <li>
+                        <button id="checkers" class="" name="comment" value="checkers">komentarze</button>
+                        <a href="https://github.com/piotrekpuszczynski/checkers"
+                        >Gra w chińskie warcaby</a>
+                    </li>
+                    <!--<script src="javascript/comment.js"></script>-->
+                </ul>
+            </form>
             <p>
                 Na zdjęciu widac jak prezentują się chińskie warcaby. Jest to wieloosobowa gra od dwóch do sześciu osób,
                 w ktorą można grac przez internet.
             </p>
         </article>
     </section>
+
+    <?php include('comments.php'); ?>
 
     <section id="code">
         <aside>
