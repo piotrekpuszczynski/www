@@ -1,0 +1,20 @@
+create schema wwwlist3;
+
+create table users (
+    username varchar(20) not null primary key,
+    email varchar(20) not null,
+    password varchar(256) not null
+);
+
+create table comments (
+    id int primary key auto_increment,
+    project enum('candy hurt', 'checkers'),
+    username varchar(20) not null,
+    text varchar(500) not null,
+    date date not null,
+    time time not null
+);
+
+create trigger updateComments after delete on users
+    for each row update comments set username = 'nieznany'
+    where username = old.username;

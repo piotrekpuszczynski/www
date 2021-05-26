@@ -321,7 +321,57 @@ div {
 #comments {
   @extend %center;
   font-size: 6vh;
+  color: white;
   aside > p {
     color: $second-accent-color;
+  }
+  article {
+    > form {
+      font-size: 2vh;
+      padding-top: 2vh;
+      textarea {
+        @include size(100%, 15vh);
+        color: white;
+      }
+      button {
+        border-radius: 50px;
+        background-color: white;
+        color: black;
+        @include size(6vh, 3vh);
+
+        &:hover {
+          background-color: black;
+          color: white;
+        }
+      }
+    }
+    > ul {
+      margin: 0;
+      border: 2px solid white;
+      height: 60vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+
+      > p {
+        margin: 0;
+        height: 1.4vh;
+        font-size: 1.4vh;
+      }
+
+      > li {
+        margin: 0;
+        font-size: 3vh;
+
+        .u {
+          color: grey;
+        }
+
+        .t {
+          @include size(80%, 100%);
+          text-align: left;
+          word-wrap: break-word;
+        }
+      }
+    }
   }
 }

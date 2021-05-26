@@ -7,9 +7,19 @@ if (!isset($_COOKIE["session"]) && isset($_SESSION["username"])) {
     include('logout.php');
 }
 
-if ($_SERVER['REQUEST_METHOD'] === "POST") {
-    $_SESSION["comment"] = $_POST["comment"];
-    header("Location: #projects");
+if ($_SERVER['REQUEST_METHOD'] === "POST" && $_POST["comment"]) {
+    if (!isset($_SESSION["comment"])) {
+        $_SESSION["comment"] = $_POST["comment"];
+        header("Location: #comments");
+    } else {
+        if ($_SESSION["comment"] === $_POST["comment"]) {
+            $_SESSION["comment"] = null;
+            header("Location: #projects");
+        } else {
+            $_SESSION["comment"] = $_POST["comment"];
+            header("Location: #comments");
+        }
+    }
 }
 ?>
 
@@ -62,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         <article>
             <h2>Projekty</h2>
             <p>Jak narazie zrealizowałem dwa wieksze projekty, jeden sam i jeden w zespole dwuosobowym.</p>
-            <form method="post">
+            <form method="post" id="show">
                 <ul>
                     <li>
                         <button id="db" class="" name="comment" value="candy hurt">komentarze</button>
