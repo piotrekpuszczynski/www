@@ -8,6 +8,6 @@ prosta strona o mnie
 
 układanka wybranego zdjęcia
 
-[lista 3 (rozszeżenie listay 1)](https://piotrekpuszczynski.github.io/www/lista3/index.php)
+lista 3 (rozszeżenie listay 1)
 
 rozszeżenie strony z listy 1 o tworzenie konta i opcje komentowania projektów w akapicie z projektami
